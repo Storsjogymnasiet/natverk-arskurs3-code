@@ -1,0 +1,22 @@
+# Terraform
+.terraform/
+.terraform.tfstate.lock.info
+terraform.tfstate
+terraform.tfstate.*
+crash.log
+crash.*.log
+*.tfplan
+
+# Lokala override-filer
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Nedladdad Vagrant-box
+vagrant.box
+
+# Editor
+.vscode/
+.idea/
+*.swp
