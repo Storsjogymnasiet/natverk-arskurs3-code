@@ -1,1 +1,3 @@
-# natverk-arskurs3-code-
+# Nätverk årskurs 3 - CODE
+
+Kod för nätverkskurserna årskurs 3
