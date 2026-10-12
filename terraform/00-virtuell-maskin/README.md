@@ -272,18 +272,3 @@ terraform apply
 
 ---
 
-## 9. Övningar
-
-1. **Fler maskiner.** Sätt `vm_count = 3` i `terraform.tfvars` och kör `apply`.
-   Titta i `main.tf` – hur används `count`, `count.index` och `local.vm_names`
-   för att ge maskinerna varsitt namn? Vad händer med IP-adresserna i `servrar`?
-2. **Utöka provisioneringen.** Bygg vidare på `remote-exec`-blocket i `main.tf` så
-   att det även installerar ett paket (t.ex. `nginx`) eller lägger in en SSH-nyckel
-   för en av användarna i `users`.
-3. **Fast IP.** Just nu får servern sin IP via DHCP. Läs på om hur man sätter en
-   statisk IP i netplan via provisioneringen – och varför det är knepigt att
-   kombinera med hur den här providern väntar på att VM:en ska bli "klar".
-4. **Beskriv skillnaden** mellan det här (lokal VirtualBox) och att köra samma
-   Terraform-kod mot en molnleverantör. Vad skulle ändras? Vad vore likadant?
-5. **State-filen.** Titta i `terraform.tfstate`. Vad sparas där? Varför ska den
-   filen aldrig checkas in i git med riktiga hemligheter i?
