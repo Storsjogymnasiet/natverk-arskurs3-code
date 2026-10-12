@@ -1,0 +1,13 @@
+# Kopiera filen:  cp terraform.tfvars.example terraform.tfvars
+# och fyll i dina egna värden. terraform.tfvars innehåller hemligheter –
+# den ska ALDRIG in i git (den står i .gitignore).
+
+# Token skapar du själv i Proxmox: Datacenter → Permissions → API Tokens → Add
+# (Token ID: terraform, avmarkera "Privilege Separation")
+proxmox_api_token = "itjoab01@valhalla!terraform=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+proxmox_node      = "asgard-midgard003" # eller asgard-midgard004
+
+elev     = "itjoab01"         # ditt AD-användarnamn – VM:en heter prod-itjoab01
+ip       = "192.168.47.XX"    # din Prod-IP från Excel i Teams
+username = "ditt-anvandarnamn" # kontot på servern (samma som på dev)
+password = "byt-till-ett-starkt-losenord"
