@@ -31,6 +31,13 @@ echo ""
 echo "API-token: skapa den i Proxmox → Datacenter → Permissions → API Tokens → Add"
 echo "  User: $elev@valhalla   Token ID: terraform   Avmarkera \"Privilege Separation\""
 while true; do
+    read -rp "Token ID (det du skrev i rutan Token ID, syns efter ! i listan) [terraform]: " tokenid
+    tokenid=${tokenid:-terraform}
+    tokenid=${tokenid#*!}
+    [[ $tokenid =~ ^[A-Za-z][A-Za-z0-9._-]*$ ]] && break
+    echo "  Skriv bara namnet, t.ex. terraform eller hej123."
+done
+while true; do
     read -rsp "Klistra in Secret (syns inte när du skriver): " secret
     echo ""
     [[ $secret =~ ^[0-9a-f-]{36}$ ]] && break
@@ -69,7 +76,7 @@ done
 umask 077
 cat > terraform.tfvars <<EOF
 # Skapad av setup.sh $(date '+%Y-%m-%d %H:%M'). Innehåller hemligheter – dela aldrig.
-proxmox_api_token = "$(hcl "$elev@valhalla!terraform=$secret")"
+proxmox_api_token = "$(hcl "$elev@valhalla!$tokenid=$secret")"
 proxmox_node      = "$nod"
 
 elev     = "$(hcl "$elev")"
