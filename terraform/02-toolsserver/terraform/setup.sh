@@ -85,6 +85,21 @@ username = "$(hcl "$username")"
 password = "$(hcl "$password")"
 EOF
 
+# VM:en ska heta tools-<elev>, inte prod-<elev>
+if [ -f main.tf ]; then
+    if [ -f terraform.tfstate ] && grep -q '"name": "prod-' terraform.tfstate; then
+        echo ""
+        echo "STOPP: den här mappen har redan en prod-server i terraform.tfstate."
+        echo "Kör setup.sh i en egen mapp för tools-servern, annars döps prod-servern om."
+        exit 1
+    fi
+    sed -i \
+        -e 's/"prod-\${var\.elev}"/"tools-${var.elev}"/' \
+        -e 's/"Prod-server för /"Tools-server för /' \
+        -e 's/tags *= \["prod",/tags        = ["tools",/' \
+        main.tf
+fi
+
 echo ""
 echo "Klart! terraform.tfvars är skapad."
 echo "Servern blir: tools-$elev på $nod med IP $ip"
